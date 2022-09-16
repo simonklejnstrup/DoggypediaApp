@@ -4,7 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.doggypediaapp.R
 import com.example.doggypediaapp.databinding.ItemBreedslistBinding
 
 class BreedsListAdapter (private val breedsList: ArrayList<BreedsListModel>): RecyclerView.Adapter<BreedsListAdapter.ViewHolder>() {
@@ -25,7 +29,12 @@ class BreedsListAdapter (private val breedsList: ArrayList<BreedsListModel>): Re
     class ViewHolder(private val binding: ItemBreedslistBinding ):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: BreedsListModel) {
-            binding.breedNameTextView.text = model.breedName
+            binding.breedNameButton.text = model.breedName
+
+            binding.root.setOnClickListener {
+                binding.breedNameButton.text = "model.breedName"
+                findNavController(itemView).navigate(R.id.breedImagesFragment)
+            }
         }
 
 
