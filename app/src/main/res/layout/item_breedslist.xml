@@ -4,18 +4,6 @@
     android:layout_height="50dp"
     android:orientation="vertical">
 
-
-
-    <!--<androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/breedNameTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/archivo_narrow_bold"
-        android:gravity="center"
-        android:text="Affenpinscher"
-        android:textColor="@color/text"
-        android:textSize="24sp" />-->
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/breedNameButton"
         android:layout_width="match_parent"

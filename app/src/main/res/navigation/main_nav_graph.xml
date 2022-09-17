@@ -9,9 +9,17 @@
         android:id="@+id/breedsListFragment"
         android:name="com.example.doggypediaapp.ui.breedslist.BreedsListFragment"
         android:label="fragment_breeds_list"
-        tools:layout="@layout/fragment_breeds_list" />
+        tools:layout="@layout/fragment_breeds_list" >
+        <action
+            android:id="@+id/action_breedsListFragment_to_breedImagesFragment"
+            app:destination="@id/breedImagesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/breedImagesFragment"
         android:name="com.example.doggypediaapp.ui.breedimages.BreedImagesFragment"
-        android:label="BreedImagesFragment" />
+        android:label="BreedImagesFragment" >
+        <argument
+            android:name="breedName"
+            app:argType="string" />
+    </fragment>
 </navigation>

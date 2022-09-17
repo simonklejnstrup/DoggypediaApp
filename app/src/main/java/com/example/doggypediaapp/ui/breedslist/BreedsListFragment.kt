@@ -1,10 +1,12 @@
 package com.example.doggypediaapp.ui.breedslist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doggypediaapp.R
 import com.example.doggypediaapp.databinding.FragmentBreedsListBinding
@@ -28,7 +30,7 @@ class BreedsListFragment : Fragment(R.layout.fragment_breeds_list) {
     )
 
     private lateinit var binding: FragmentBreedsListBinding
-    private val adapter = BreedsListAdapter(breedsList)
+    private val adapter = BreedsListAdapter(breedsList) { breedName -> onButtonClicked(breedName) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +48,11 @@ class BreedsListFragment : Fragment(R.layout.fragment_breeds_list) {
 
         binding.breedsListRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.breedsListRecyclerView.adapter = adapter
+    }
 
-
+    fun onButtonClicked(breedName: String) {
+        val action = BreedsListFragmentDirections.actionBreedsListFragmentToBreedImagesFragment(breedName)
+        findNavController().navigate(action)
     }
 
 
