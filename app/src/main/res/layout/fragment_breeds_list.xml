@@ -5,10 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.breedslist.BreedsListFragment">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFavourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:text="Favourites"
+        android:textColor="@color/text"
+        android:textSize="24sp"
+        android:textAllCaps="false"
+        android:gravity="center"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/breedsListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="657dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        tools:listitem="@layout/item_breedslist"/>
 </RelativeLayout>

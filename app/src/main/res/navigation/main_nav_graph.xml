@@ -22,4 +22,8 @@
             android:name="breedName"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.example.doggypediaapp.ui.favourites.FavouritesFragment"
+        android:label="FavouritesFragment" />
 </navigation>

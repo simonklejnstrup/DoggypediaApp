@@ -1,6 +1,8 @@
 package com.example.doggypediaapp.ui.breedslist
 
+import com.google.gson.annotations.SerializedName
+
 data class BreedsListModel (
-    val breedName: String,
-    val subBreeds: Array<String>
+    @SerializedName("message")
+    val breedsMap: LinkedHashMap<String, Array<String>>
     )
