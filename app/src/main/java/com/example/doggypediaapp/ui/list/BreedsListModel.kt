@@ -1,4 +1,4 @@
-package com.example.doggypediaapp.ui.breedslist
+package com.example.doggypediaapp.ui.list
 
 import com.google.gson.annotations.SerializedName
 

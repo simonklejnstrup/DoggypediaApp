@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/breedsListFragment"
-        android:name="com.example.doggypediaapp.ui.breedslist.BreedsListFragment"
+        android:name="com.example.doggypediaapp.ui.list.BreedsListFragment"
         android:label="fragment_breeds_list"
         tools:layout="@layout/fragment_breeds_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/breedImagesFragment"
-        android:name="com.example.doggypediaapp.ui.breedimages.BreedImagesFragment"
+        android:name="com.example.doggypediaapp.ui.images.ImagesFragment"
         android:label="BreedImagesFragment" >
         <argument
             android:name="breedName"

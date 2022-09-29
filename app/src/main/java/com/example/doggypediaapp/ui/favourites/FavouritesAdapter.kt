@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.doggypediaapp.App.Companion.sharedPrefs
 import com.example.doggypediaapp.R
 import com.example.doggypediaapp.databinding.ItemFavouritesBinding
-import com.example.doggypediaapp.session.User
+import com.example.doggypediaapp.sharedprefs.SharedPrefs
 import com.squareup.picasso.Picasso
 
 class FavouritesAdapter(
@@ -16,6 +17,7 @@ private var onLikeClicked: ((model: FavouritesModel) -> Unit)
 
     var favouritesList: ArrayList<FavouritesModel> = ArrayList()
     var favouritesListFiltered: ArrayList<FavouritesModel> = ArrayList()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -35,8 +37,8 @@ private var onLikeClicked: ((model: FavouritesModel) -> Unit)
         return favouritesListFiltered.size
     }
 
-    fun addData(list: List<FavouritesModel>) {
-        favouritesList = list as ArrayList<FavouritesModel>
+    fun addData(list: ArrayList<FavouritesModel>) {
+        favouritesList = list
         favouritesListFiltered = favouritesList
         notifyDataSetChanged()
     }
@@ -71,7 +73,7 @@ private var onLikeClicked: ((model: FavouritesModel) -> Unit)
 
             binding.favouritesTextView.text = model.breedName
 
-            if (User.isFavourite(model)) {
+            if (sharedPrefs?.isFavourite(model) == true) {
                 binding.favouritesLikeButton.setImageResource(R.drawable.ic_heart_filled)
                 binding.favouritesLikeButton.tag = "filled"
             } else {

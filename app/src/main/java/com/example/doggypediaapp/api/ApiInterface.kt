@@ -1,8 +1,10 @@
 package com.example.doggypediaapp.api
 
-import com.example.doggypediaapp.ui.breedimages.BreedImageModel
-import com.example.doggypediaapp.ui.breedslist.BreedsListModel
+import com.example.doggypediaapp.ui.images.ImagesModel
+import com.example.doggypediaapp.ui.list.BreedsListModel
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -15,7 +17,7 @@ interface ApiInterface {
 
 
     @GET("breed/{breedName}/images")
-    suspend fun getImagesByBreed(@Path("breedName") breedName: String): BreedImageModel
+    suspend fun getImagesByBreed(@Path("breedName") breedName: String): Response<ImagesModel>
 
     companion object {
 
@@ -26,7 +28,6 @@ interface ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
-
                 .build()
             return retrofit.create(ApiInterface::class.java)
 

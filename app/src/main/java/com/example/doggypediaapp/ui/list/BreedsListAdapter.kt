@@ -1,16 +1,8 @@
-package com.example.doggypediaapp.ui.breedslist
+package com.example.doggypediaapp.ui.list
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.doggypediaapp.R
 import com.example.doggypediaapp.databinding.ItemBreedslistBinding
 
 class BreedsListAdapter (private var onButtonClicked: ((breedName: String) -> Unit)

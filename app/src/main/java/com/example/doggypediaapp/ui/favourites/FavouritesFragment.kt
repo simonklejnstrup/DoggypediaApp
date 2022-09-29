@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.doggypediaapp.App.Companion.sharedPrefs
 import com.example.doggypediaapp.databinding.FragmentFavouritesBinding
-import com.example.doggypediaapp.session.User
 
 class FavouritesFragment: Fragment(), SearchView.OnQueryTextListener {
 
@@ -38,12 +38,16 @@ class FavouritesFragment: Fragment(), SearchView.OnQueryTextListener {
         binding.favouritesRecyclerView.adapter = adapter
         binding.searchView.setOnQueryTextListener(this)
 
-        adapter.addData(User.getAllFavourites())
+        if (com.example.doggypediaapp.sharedPrefs.getFavouritesAsArrayList()!!.size > 0) {
+            com.example.doggypediaapp.sharedPrefs.getFavouritesAsArrayList()
+                ?.let { adapter.addData(it) }
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun onLikeClicked(model: FavouritesModel) {
-        val response = User.editFavourites(model)
+        val response = com.example.doggypediaapp.sharedPrefs.editFavourites(model)
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
     }
 

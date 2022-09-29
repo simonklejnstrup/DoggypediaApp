@@ -1,19 +1,20 @@
-package com.example.doggypediaapp.ui.breedimages
+package com.example.doggypediaapp.ui.images
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doggypediaapp.R
 import com.example.doggypediaapp.databinding.ItemBreedimageslistBinding
-import com.example.doggypediaapp.session.User
+import com.example.doggypediaapp.sharedprefs.SharedPrefs
 import com.example.doggypediaapp.ui.favourites.FavouritesModel
 import com.squareup.picasso.Picasso
 
-class BreedImagesAdapter(
+class ImagesAdapter(
     private var onLikeClicked: ((imgUrl: String) -> Unit)
-) : RecyclerView.Adapter<BreedImagesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
 
     private val breedImagesList = ArrayList<String>()
+    private val TAG = "ImagesAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -39,7 +40,7 @@ class BreedImagesAdapter(
         notifyDataSetChanged()
     }
 
-    class ViewHolder(
+    inner class ViewHolder(
         private val binding: ItemBreedimageslistBinding,
         private var onLikeClicked: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -69,13 +70,13 @@ class BreedImagesAdapter(
                 .centerInside()
                 .into(binding.breedImageView)
 
-            if (User.isFavourite(FavouritesModel(url, ""))) {
+            /*if (SharedPrefs.isFavourite(FavouritesModel(url, ""))) {
                 binding.likeButton.setImageResource(R.drawable.ic_heart_filled)
                 binding.likeButton.tag = "filled"
             } else {
                 binding.likeButton.setImageResource(R.drawable.ic_heart_empty)
                 binding.likeButton.tag = "empty"
-            }
+            }*/
         }
 
 
