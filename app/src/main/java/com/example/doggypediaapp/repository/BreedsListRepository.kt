@@ -3,38 +3,30 @@ package com.example.doggypediaapp.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.doggypediaapp.api.ApiInterface
-import com.example.doggypediaapp.ui.images.ImagesModel
-import com.example.doggypediaapp.ui.list.BreedsListModel
+import com.example.doggypediaapp.ui.list.BreedsListRetroResponse
 import kotlinx.coroutines.*
 import retrofit2.HttpException
-import retrofit2.Response
 
-class ImageRepository() {
-    private var mutableLiveData = MutableLiveData<List<String>>()
+class BreedsListRepository {
+    private var mutableLiveData = MutableLiveData<BreedsListRetroResponse>()
     val completableJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.IO + completableJob)
-    private val TAG = "ImageRepository"
+    private val TAG = "BreedsListRepository"
 
     private val service by lazy {
         ApiInterface.create()
     }
 
-    fun getMutableLiveData(model: BreedsListModel):MutableLiveData<List<String>> {
+    fun getMutableLiveData(): MutableLiveData<BreedsListRetroResponse> {
 
         coroutineScope.launch {
-            var request: Response<ImagesModel>
-            if (model.subbreed.isNotEmpty()) {
-                request = service.getImagesBySubbreed(model.breed, model.subbreed)
-            } else {
-                request = service.getImagesByBreed(model.breed)
-            }
-
+            val request = service.getBreedsList()
             withContext(Dispatchers.Main) {
                 try {
                     if (request.body() != null) {
+                        Log.d(TAG, request.body().toString())
 
-                        val urlList = request.body()!!.message
-                        mutableLiveData.value = urlList!!
+                        mutableLiveData.value = request.body()!!
 
                     }
 
@@ -49,5 +41,4 @@ class ImageRepository() {
         return mutableLiveData;
 
     }
-
 }

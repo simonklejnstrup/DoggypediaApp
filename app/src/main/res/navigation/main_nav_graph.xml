@@ -19,8 +19,8 @@
         android:name="com.example.doggypediaapp.ui.images.ImagesFragment"
         android:label="BreedImagesFragment" >
         <argument
-            android:name="breedName"
-            app:argType="string" />
+            android:name="breedsListModel"
+            app:argType="com.example.doggypediaapp.ui.list.BreedsListModel" />
     </fragment>
     <fragment
         android:id="@+id/favouritesFragment"

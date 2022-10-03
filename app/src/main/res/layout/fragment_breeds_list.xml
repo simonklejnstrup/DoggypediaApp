@@ -5,13 +5,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.list.BreedsListFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFavourites"
+    <TextView
+        android:id="@+id/headerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        android:text="@string/doggypedia"
+
+        android:fontFamily="@font/archivo_narrow_bold"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFavourites"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:text="Favourites"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:text="❤"
         android:textColor="@color/text"
         android:textSize="24sp"
         android:textAllCaps="false"
@@ -23,5 +35,5 @@
         android:layout_width="match_parent"
         android:layout_height="657dp"
         android:layout_alignParentBottom="true"
-        tools:listitem="@layout/item_breedslist"/>
+        tools:listitem="@layout/item_breedslist_breed"/>
 </RelativeLayout>

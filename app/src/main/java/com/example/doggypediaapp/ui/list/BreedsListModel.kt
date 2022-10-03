@@ -1,8 +1,11 @@
 package com.example.doggypediaapp.ui.list
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-data class BreedsListModel (
-    @SerializedName("message")
-    val breedsMap: LinkedHashMap<String, Array<String>>
-    )
+@Parcelize
+data class BreedsListModel(
+    val breed: String,
+    val subbreed: String = "",
+    val isSubbreed: Boolean = false
+) : Parcelable

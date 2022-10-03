@@ -3,6 +3,7 @@ package com.example.doggypediaapp.ui.images
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.doggypediaapp.App.Companion.sharedPrefs
 import com.example.doggypediaapp.R
 import com.example.doggypediaapp.databinding.ItemBreedimageslistBinding
 import com.example.doggypediaapp.sharedprefs.SharedPrefs
@@ -50,9 +51,7 @@ class ImagesAdapter(
 
                 if (binding.likeButton.tag == "empty") {
                     binding.likeButton.tag = "filled"
-                }
-                else
-                {
+                } else {
                     binding.likeButton.setImageResource(R.drawable.ic_heart_empty)
                     binding.likeButton.tag = "empty"
                 }
@@ -70,13 +69,13 @@ class ImagesAdapter(
                 .centerInside()
                 .into(binding.breedImageView)
 
-            /*if (SharedPrefs.isFavourite(FavouritesModel(url, ""))) {
+            if (sharedPrefs?.isFavourite(FavouritesModel(url, "")) == true) {
                 binding.likeButton.setImageResource(R.drawable.ic_heart_filled)
                 binding.likeButton.tag = "filled"
             } else {
                 binding.likeButton.setImageResource(R.drawable.ic_heart_empty)
                 binding.likeButton.tag = "empty"
-            }*/
+            }
         }
 
 

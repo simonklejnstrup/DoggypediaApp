@@ -71,7 +71,7 @@ private var onLikeClicked: ((model: FavouritesModel) -> Unit)
                 .centerInside()
                 .into(binding.favouritesImageView)
 
-            binding.favouritesTextView.text = model.breedName
+            binding.favouritesTextView.text = model.breedName.replaceFirstChar(Char::uppercase)
 
             if (sharedPrefs?.isFavourite(model) == true) {
                 binding.favouritesLikeButton.setImageResource(R.drawable.ic_heart_filled)

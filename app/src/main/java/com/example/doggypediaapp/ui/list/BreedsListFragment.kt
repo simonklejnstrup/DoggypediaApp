@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doggypediaapp.R
@@ -13,13 +14,11 @@ import com.example.doggypediaapp.databinding.FragmentBreedsListBinding
 
 class BreedsListFragment : Fragment(R.layout.fragment_breeds_list) {
 
-    val breedsListModel = BreedsListModel(
-        linkedMapOf("african" to emptyArray(),
-                    "beagle" to emptyArray())
-    )
-
     private lateinit var binding: FragmentBreedsListBinding
-    private val adapter = BreedsListAdapter { breedName -> onButtonClicked(breedName) }
+    private val adapter = BreedsListAdapter { breedsListAdapterModel -> onButtonClicked(breedsListAdapterModel) }
+    private val viewModel: BreedsListViewModel by viewModels {
+        BreedsListViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,17 +33,41 @@ class BreedsListFragment : Fragment(R.layout.fragment_breeds_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initContent()
 
+    }
+
+    private fun setupRecyclerView(list: ArrayList<BreedsListModel>) {
+        adapter.setBreedsListItems(list)
         binding.apply {
             breedsListRecyclerView.layoutManager = LinearLayoutManager(context)
             breedsListRecyclerView.adapter = adapter
             btnFavourites.setOnClickListener { findNavController().navigate(R.id.favouritesFragment) }
         }
-        adapter.setBreedsListItems(breedsListModel)
     }
 
-    fun onButtonClicked(breedName: String) {
-        val action = BreedsListFragmentDirections.actionBreedsListFragmentToBreedImagesFragment(breedName)
+    private fun initContent() {
+        viewModel.breedmap.observe(viewLifecycleOwner) {
+            val sortedBreedList = objectifyBreedmap(it)
+            setupRecyclerView(sortedBreedList)
+        }
+    }
+
+    private fun objectifyBreedmap(it: BreedsListRetroResponse?): ArrayList<BreedsListModel> {
+        val list = ArrayList<BreedsListModel>()
+        if (it != null) {
+            for ((breed, subbreeds) in it.breedsMap) {
+                list.add(BreedsListModel(breed))
+                if (subbreeds.size > 0 ) {
+                    subbreeds.forEach {subbreed -> list.add(BreedsListModel(breed, subbreed, true)) }
+                }
+            }
+        }
+        return list
+    }
+
+    private fun onButtonClicked(model: BreedsListModel) {
+        val action = BreedsListFragmentDirections.actionBreedsListFragmentToBreedImagesFragment(model)
         findNavController().navigate(action)
     }
 
